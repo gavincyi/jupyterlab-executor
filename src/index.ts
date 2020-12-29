@@ -6,12 +6,16 @@ import {
 } from '@jupyterlab/application';
 
 import {
-  Clipboard, showDialog, Dialog
+  Clipboard, showDialog, Dialog, MainAreaWidget
 } from '@jupyterlab/apputils';
 
 import {
   IFileBrowserFactory
 } from '@jupyterlab/filebrowser';
+
+import { TerminalManager } from '@jupyterlab/services';
+
+import { Terminal } from '@jupyterlab/terminal';
 
 import { ExecutionWidget } from './executor';
 
@@ -49,14 +53,30 @@ function activate(
           body: new ExecutionWidget(path)
       });
 
-      result.then(object => {
+      result.then(async object => {
         if (object.button.accept) {
           if (object.button.label === 'Execute') {
             console.log('Execute the command');
-            // return app.commands.execute('terminal:open', {
-            //   // initialCommand: `${object.value}\r\n${object.value}`
-            //   initialCommand: 'bash -c "touch abc.txt"'
-            // });
+
+            const manager = new TerminalManager();
+            const s1 = await manager.startNew();
+            const term1 = new Terminal(s1, { 
+              theme: 'light',
+              initialCommand: `${object.value}`
+            });
+            term1.title.closable = true;
+
+            const widget = new MainAreaWidget({ content: term1 });
+            widget.id = 'jupyter-executor';
+            widget.title.label = 'Execute';
+            widget.title.closable = true;
+
+            if (!widget.isAttached) {
+              // Attach the widget to the main work area if it's not there
+              app.shell.add(widget, 'main');
+            }
+            // Activate the widget
+            app.shell.activateById(widget.id);
           }
           else if (object.button.label == 'Copy Command') {
             Clipboard.copyToSystem(object.value);

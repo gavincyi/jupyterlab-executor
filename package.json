@@ -46,6 +46,8 @@
     "@jupyterlab/application": "^3.0.0",
     "@jupyterlab/apputils": "^3.0.0",
     "@jupyterlab/filebrowser": "^3.0.0",
+    "@jupyterlab/services": "^6.0.0",
+    "@jupyterlab/terminal": "^3.0.0",
     "@phosphor/algorithm": "^1.2.0"
   },
   "devDependencies": {
