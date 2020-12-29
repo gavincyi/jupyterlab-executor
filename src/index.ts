@@ -6,12 +6,13 @@ import {
 } from '@jupyterlab/application';
 
 import {
-  Clipboard, showDialog, Dialog, MainAreaWidget
+  Clipboard,
+  showDialog,
+  Dialog,
+  MainAreaWidget
 } from '@jupyterlab/apputils';
 
-import {
-  IFileBrowserFactory
-} from '@jupyterlab/filebrowser';
+import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 
 import { TerminalManager } from '@jupyterlab/services';
 
@@ -19,20 +20,14 @@ import { Terminal } from '@jupyterlab/terminal';
 
 import { ExecutionWidget } from './executor';
 
-function isExecutableScript (widget : any) {
-  return (
-    widget &&
-    toArray(widget.selectedItems()).length === 1
-  )
+function isExecutableScript(widget: any): boolean {
+  return widget && toArray(widget.selectedItems()).length === 1;
 }
 
 /**
-* Activate the jupyterlab-executor
-*/
-function activate(
-  app: JupyterFrontEnd, 
-  factory: IFileBrowserFactory
-) {
+ * Activate the jupyterlab-executor
+ */
+function activate(app: JupyterFrontEnd, factory: IFileBrowserFactory) {
   console.log('JupyterLab extension jupyterlab-executor is activated!');
   const { tracker } = factory;
 
@@ -44,13 +39,13 @@ function activate(
       }
       const path = widget.selectedItems().next().path;
       const result = showDialog({
-          title: "Execute",
-          buttons: [
-            Dialog.createButton({ label:'Execute' }),
-            Dialog.okButton({ label: 'Copy Command' }),
-            Dialog.cancelButton({ label: 'Cancel' })
-          ],
-          body: new ExecutionWidget(path)
+        title: 'Execute',
+        buttons: [
+          Dialog.createButton({ label: 'Execute' }),
+          Dialog.okButton({ label: 'Copy Command' }),
+          Dialog.cancelButton({ label: 'Cancel' })
+        ],
+        body: new ExecutionWidget(path)
       });
 
       result.then(async object => {
@@ -60,7 +55,7 @@ function activate(
 
             const manager = new TerminalManager();
             const s1 = await manager.startNew();
-            const term1 = new Terminal(s1, { 
+            const term1 = new Terminal(s1, {
               theme: 'light',
               initialCommand: `${object.value}`
             });
@@ -77,15 +72,12 @@ function activate(
             }
             // Activate the widget
             app.shell.activateById(widget.id);
-          }
-          else if (object.button.label == 'Copy Command') {
+          } else if (object.button.label === 'Copy Command') {
             Clipboard.copyToSystem(object.value);
-          }
-          else {
+          } else {
             console.log(`${object.button.label}`);
           }
-        }
-        else {
+        } else {
           console.log('Canceled');
         }
       });
@@ -98,7 +90,7 @@ function activate(
   app.contextMenu.addItem({
     command: 'jupyterlab-executor:executable',
     selector: '.jp-DirListing-item'
-  })
+  });
 }
 
 /**

@@ -1,21 +1,19 @@
-import {
-  Widget
-} from '@lumino/widgets';
+import { Widget } from '@lumino/widgets';
 
-function createOption(text: string, value: string) {
+function createOption(text: string, value: string): HTMLElement {
   const option = document.createElement('option');
   option.text = text;
   option.value = value;
   return option;
 }
 
-function createDialogBody() {
+function createDialogBody(): HTMLElement {
   const body = document.createElement('div');
 
   // Add executor selector
-  const executor_label = document.createElement('label');
-  executor_label.textContent = 'Executor';
-  body.appendChild(executor_label);
+  const executorLabel = document.createElement('label');
+  executorLabel.textContent = 'Executor';
+  body.appendChild(executorLabel);
   const selector = document.createElement('select');
   selector.appendChild(createOption('bash', 'bash '));
   selector.appendChild(createOption('python', 'python '));
@@ -23,9 +21,9 @@ function createDialogBody() {
   body.appendChild(selector);
 
   // Add execute arguments
-  const arguments_label = document.createElement('label');
-  arguments_label.textContent = 'Arugments';
-  body.appendChild(arguments_label);
+  const arugmentsLabel = document.createElement('label');
+  arugmentsLabel.textContent = 'Arugments';
+  body.appendChild(arugmentsLabel);
   const textbox = document.createElement('input');
   textbox.type = 'text';
   textbox.value = '';
@@ -46,7 +44,7 @@ export class ExecutionWidget extends Widget {
     this._path = path;
   }
 
-  getValue() {
+  getValue(): string {
     const executor = this.node.querySelector('select') as HTMLSelectElement;
     const args = this.node.querySelector('input') as HTMLInputElement;
     return `${executor.value}${this._path} ${args.value}`;
