@@ -4,6 +4,11 @@
 
 JupyterLab extension of executing the scripts
 
+[![demo](doc/README/demo.gif)]
+
+The extension helps the user execute the script in the terminal and provides
+multiple common executors, e.g. bash and python. Users can customise the
+executors in the settings as well.
 
 
 ## Requirements
@@ -16,6 +21,42 @@ JupyterLab extension of executing the scripts
 pip install jupyterlab_executor
 ```
 
+## Customisation
+
+The executors can be customised from the JupyterLab settings.
+
+[![Customisation settings](doc/README/customisation-settings.png)]
+
+Alternatively, the customisation JSON file can be appended into the
+[users setting directory](https://jupyterlab.readthedocs.io/en/stable/user/directories.html?highlight=%22jupyterlab-settings%22#jupyterlab-user-settings-directory).
+The file path should be 
+`$HOME/.jupyter/lab/user-settings/@gavincyi/jupyterlab-executor/executor.jupyterlab-settings` 
+and the format is like the following
+
+```
+{
+    "executors": [
+        {
+            "name": "bash",
+            "command": "bash "
+        },
+        {
+            "name": "python",
+            "command": "python "
+        },
+        ...
+    ]
+}
+```
+
+The `executors` variable is a list of descriptions, of which
+
+1. `name` is the string shown in the dialog
+
+2. `command` is the executor command to run
+
+The execution script format is `${command}${path} ${args}`, where
+`args` is the user defined arguments in the dialog.
 
 ## Contributing
 
