@@ -20,7 +20,12 @@ function createOption(text: string, value: string): HTMLElement {
   return option;
 }
 
-function createDialogBody(): HTMLElement {
+export class ExecutorOptions {
+  constructor() {}
+  executors: any;
+}
+
+function createDialogBody(options: ExecutorOptions): HTMLElement {
   const body = document.createElement('div');
 
   // Add executor selector
@@ -28,9 +33,12 @@ function createDialogBody(): HTMLElement {
   executorLabel.textContent = 'Executor';
   body.appendChild(executorLabel);
   const selector = document.createElement('select');
-  selector.appendChild(createOption('bash', 'bash '));
-  selector.appendChild(createOption('python', 'python '));
-  selector.appendChild(createOption('cat', 'cat '));
+  for (var executor of options.executors) {
+    const option = document.createElement('option');
+    option.text = executor['name'];
+    option.value = executor['command'];
+    selector.appendChild(option);
+  }
   body.appendChild(selector);
 
   // Add execute arguments
@@ -52,8 +60,8 @@ export class ExecutionWidget extends Widget {
   /**
    * Create a new kernel selector widget.
    */
-  constructor(path: string) {
-    super({ node: createDialogBody() });
+  constructor(path: string, options: ExecutorOptions) {
+    super({ node: createDialogBody(options) });
     this._path = path;
   }
 
@@ -69,7 +77,11 @@ export class ExecutionWidget extends Widget {
 /**
  * Show the execution dialog
  */
-export function showExecutionDialog(app: JupyterFrontEnd, path: string) {
+export function showExecutionDialog(
+  app: JupyterFrontEnd, 
+  path: string,
+  options: ExecutorOptions
+) {
   const dialog = showDialog({
     title: 'Execute',
     buttons: [
@@ -77,7 +89,7 @@ export function showExecutionDialog(app: JupyterFrontEnd, path: string) {
       Dialog.okButton({ label: 'Copy Command' }),
       Dialog.cancelButton({ label: 'Cancel' })
     ],
-    body: new ExecutionWidget(path)
+    body: new ExecutionWidget(path, options)
   });
 
   dialog.then(async object => {

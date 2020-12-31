@@ -1,0 +1,35 @@
+{
+  "jupyter.lab.setting-icon-class": "jp-RunIcon",
+  "jupyter.lab.setting-icon-label": "Executor",
+  "title": "Executor",
+  "description": "Settings for the executor plugin.",
+  "properties": {
+    "executors": {
+      "description": "The list of the executors.",
+      "title": "Executor",
+      "type": "array",
+      "items": { "$ref": "#/definitions/executor" },
+      "default": [
+        {
+            "name": "bash",
+            "command": "bash "
+        },
+        {
+            "name": "python",
+            "command": "python "
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "definitions": {
+    "executor": {
+      "properties": {
+        "command": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "required": [ "name", "command" ],
+      "type": "object"
+    }
+  }
+}
