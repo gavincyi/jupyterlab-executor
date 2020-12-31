@@ -112,4 +112,4 @@ dmypy.json
 .DS_Store
 
 # Python environment
-venv
+venv*
