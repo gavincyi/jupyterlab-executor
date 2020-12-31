@@ -13,15 +13,13 @@ import { TerminalManager } from '@jupyterlab/services';
 
 import { Terminal } from '@jupyterlab/terminal';
 
-function createOption(text: string, value: string): HTMLElement {
-  const option = document.createElement('option');
-  option.text = text;
-  option.value = value;
-  return option;
-}
-
+/**
+ * Executor options
+ */
 export class ExecutorOptions {
-  constructor() {}
+  /**
+   * List of executors
+   */
   executors: any;
 }
 
@@ -33,7 +31,7 @@ function createDialogBody(options: ExecutorOptions): HTMLElement {
   executorLabel.textContent = 'Executor';
   body.appendChild(executorLabel);
   const selector = document.createElement('select');
-  for (var executor of options.executors) {
+  for (const executor of options.executors) {
     const option = document.createElement('option');
     option.text = executor['name'];
     option.value = executor['command'];
@@ -78,7 +76,7 @@ export class ExecutionWidget extends Widget {
  * Show the execution dialog
  */
 export function showExecutionDialog(
-  app: JupyterFrontEnd, 
+  app: JupyterFrontEnd,
   path: string,
   options: ExecutorOptions
 ) {

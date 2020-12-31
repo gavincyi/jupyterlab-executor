@@ -21,7 +21,7 @@ const PLUGIN_ID = 'jupyterlab-executor:executor';
  * Activate the jupyterlab-executor
  */
 function activate(
-  app: JupyterFrontEnd, 
+  app: JupyterFrontEnd,
   factory: IFileBrowserFactory,
   settingRegistry: ISettingRegistry
 ) {
@@ -29,10 +29,11 @@ function activate(
   const { tracker } = factory;
   const executorOptions = new ExecutorOptions();
 
-  Promise.all([settingRegistry.load(PLUGIN_ID), app.restored])
-    .then(([settings]) => {
-        executorOptions.executors = settings.get('executors').composite;
-    });
+  Promise.all([settingRegistry.load(PLUGIN_ID), app.restored]).then(
+    ([settings]) => {
+      executorOptions.executors = settings.get('executors').composite;
+    }
+  );
 
   app.commands.addCommand('jupyterlab-executor:executable', {
     execute: () => {
