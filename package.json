@@ -1,5 +1,5 @@
 {
-  "name": "jupyterlab-executor",
+  "name": "@gavincyi/jupyterlab-executor",
   "version": "0.1.0",
   "description": "JupyterLab extension of executing the scripts",
   "keywords": [
@@ -23,7 +23,7 @@
   "style": "style/index.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jupyterlab-executor/jupyterlab-executor.git"
+    "url": "https://github.com/gavincyi/jupyterlab-executor.git"
   },
   "scripts": {
     "build": "jlpm run build:lib && jlpm run build:labextension:dev",

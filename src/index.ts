@@ -15,7 +15,9 @@ function isExecutableScript(widget: any): boolean {
   return widget && toArray(widget.selectedItems()).length === 1;
 }
 
-const PLUGIN_ID = 'jupyterlab-executor:executor';
+const PLUGIN_ID = '@gavincyi/jupyterlab-executor:executor';
+
+const COMMAND_ID = 'jupyterlab-executor:execute';
 
 /**
  * Activate the jupyterlab-executor
@@ -35,7 +37,7 @@ function activate(
     }
   );
 
-  app.commands.addCommand('jupyterlab-executor:executable', {
+  app.commands.addCommand(COMMAND_ID, {
     execute: () => {
       const widget = tracker.currentWidget;
       if (!widget) {
@@ -52,7 +54,7 @@ function activate(
   });
 
   app.contextMenu.addItem({
-    command: 'jupyterlab-executor:executable',
+    command: COMMAND_ID,
     selector: '.jp-DirListing-item'
   });
 }

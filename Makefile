@@ -8,14 +8,14 @@ venv-jupyterlab-2.x:
 	venv-jupyterlab-2.x/bin/python -m pip install -U pip wheel setuptools
 	venv-jupyterlab-2.x/bin/python -m pip install 'jupyterlab<3.0'
 	venv-jupyterlab-2.x/bin/jlpm install
-	venv-jupyterlab-2.x/bin/python -m jupyter labextension install . --no-build
+	venv-jupyterlab-2.x/bin/jupyter labextension install . --no-build
 
 venv-jupyterlab-3.x:
 	virtualenv venv-jupyterlab-3.x
 	venv-jupyterlab-3.x/bin/python -m pip install -U pip wheel setuptools
 	venv-jupyterlab-3.x/bin/python -m pip install 'jupyterlab<4.0' jupyter-packaging
-	bash -c "source venv-jupyterlab-3.x/bin/activate && venv-jupyterlab-3.x/bin/python -m pip install -e ."
-	venv-jupyterlab-3.x/bin/python -m jupyter labextension develop --overwrite .
+	venv-jupyterlab-3.x/bin/python -m pip install -e .
+	venv-jupyterlab-3.x/bin/jupyter labextension develop --overwrite .
 
 build:
 	jlpm run build
