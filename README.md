@@ -10,15 +10,27 @@ The extension helps the user execute the script in the terminal and provides
 multiple common executors, e.g. bash and python. Users can customise the
 executors in the settings as well.
 
+Notes: As many users are still using JupyterLab 2.x and not yet migrated 
+to Jupyter 3.x, the extension supports both 2.x and 3.x until the community
+is mostly moved to JupyterLab 3.x. The package version in npm may not catch
+up with the PyPI version sometimes.
 
 ## Requirements
 
-* JupyterLab >= 3.0
+* JupyterLab >= 2.0
 
 ## Install
 
+* For JupyterLab >= 3.0, the package can be installed via PyPI
+
 ```bash
 pip install jupyterlab_executor
+```
+
+* For JupyterLab == 2.x, the package is provided only in npm
+
+```bash
+jupyter labextension install @gavincyi/jupyterlab-executor
 ```
 
 ## Customisation
