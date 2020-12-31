@@ -6,7 +6,7 @@ clean:
 venv-jupyterlab-2.x:
 	virtualenv venv-jupyterlab-2.x
 	venv-jupyterlab-2.x/bin/python -m pip install -U pip wheel setuptools
-	venv-jupyterlab-2.x/bin/python -m pip install 'jupyterlab<3.0'
+	venv-jupyterlab-2.x/bin/python -m pip install 'jupyterlab<3.0' jupyter_http_over_ws
 	venv-jupyterlab-2.x/bin/jlpm install
 	venv-jupyterlab-2.x/bin/jupyter labextension install . --no-build
 
