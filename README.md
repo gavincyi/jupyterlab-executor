@@ -1,4 +1,4 @@
-# jupyterlab_executor
+# jupyterlab-executor
 
 ![Github Actions Status](https://github.com/gavincyi/jupyterlab-executor/workflows/Build/badge.svg)
 
