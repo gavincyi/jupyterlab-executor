@@ -1,6 +1,10 @@
 # jupyterlab-executor
 
+[![PyPI Release](https://img.shields.io/pypi/v/jupyterlab-executor.svg)](https://pypi.org/project/jupyterlab-executor/)
+
 ![Github Actions Status](https://github.com/gavincyi/jupyterlab-executor/workflows/Build/badge.svg)
+
+![PyPI Downloads](https://img.shields.io/pypi/dm/jupyterlab-executor.svg)
 
 JupyterLab extension of executing the scripts
 
