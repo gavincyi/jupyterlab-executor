@@ -1,6 +1,6 @@
 {
   "name": "@gavincyi/jupyterlab-executor",
-  "version": "2021.1.0",
+  "version": "2021.1.1",
   "description": "JupyterLab extension of executing the scripts",
   "keywords": [
     "jupyter",
