@@ -72,6 +72,20 @@ The execution script format is `${command}${path} ${args}`, where
 
 ## Contributing
 
+### Roadmap
+
+The following features are not yet completed but on the roadmap. 
+
+- Inject environment variables
+
+- Support script argument template
+
+- Support default script arguments
+
+- Support refreshing the list of executors after the setting update
+
+The above features will come out very soon.
+
 ### Development install
 
 Note: You will need NodeJS to build the extension package.
