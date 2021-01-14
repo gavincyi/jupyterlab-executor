@@ -23,7 +23,7 @@ export class ExecutorOptions {
   executors: any;
 }
 
-function createDialogBody(options: ExecutorOptions): HTMLElement {
+function createDialogBody(options: ExecutorOptions, path: string): HTMLElement {
   const body = document.createElement('div');
 
   // Add executor selector
@@ -38,6 +38,17 @@ function createDialogBody(options: ExecutorOptions): HTMLElement {
     selector.appendChild(option);
   }
   body.appendChild(selector);
+
+  // Add path (disabled)
+  label = document.createElement('label');
+  label.textContent = 'Path';
+  body.appendChild(label);
+  var textbox = document.createElement('input');
+  textbox.className = 'path';
+  textbox.type = 'text';
+  textbox.value = path;
+  textbox.disabled = true;
+  body.appendChild(textbox);
 
   // Add execute arguments
   label = document.createElement('label');
@@ -70,7 +81,7 @@ export class ExecutionWidget extends Widget {
    * Create a new kernel selector widget.
    */
   constructor(path: string, options: ExecutorOptions) {
-    super({ node: createDialogBody(options) });
+    super({ node: createDialogBody(options, path) });
     this._path = path;
   }
 
@@ -78,7 +89,15 @@ export class ExecutionWidget extends Widget {
     const executor = this.node.querySelector('select') as HTMLSelectElement;
     const args = this.node.querySelector('.arguments') as HTMLInputElement;
     const envs = this.node.querySelector('.envs') as HTMLInputElement;
-    return `${envs.value} ${executor.value}${this._path} ${args.value}`;
+    var value = executor.value;
+    if (!!envs.value) {
+      value = `${envs.value} ${value}`;
+    }
+    return (
+      value
+      .replace('{path}', this._path)
+      .replace('{args}', args.value)
+    );
   }
 
   private _path = '';

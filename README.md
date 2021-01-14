@@ -54,11 +54,11 @@ and the format is like the following
     "executors": [
         {
             "name": "bash",
-            "command": "bash "
+            "command": "bash {path} {args}"
         },
         {
             "name": "python",
-            "command": "python "
+            "command": "python {path} {args}"
         },
         ...
     ]
@@ -69,10 +69,22 @@ The `executors` variable is a list of descriptions, of which
 
 1. `name` is the string shown in the dialog
 
-2. `command` is the executor command to run
+2. `command` is the executor command template to run, where `{path}`
+is the file path returned by the content manager in the JupyterLab,
+and `args` is the arguments passed in by the users.
 
-The execution script format is `${command}${path} ${args}`, where
-`args` is the user defined arguments in the dialog.
+The environment variables are always appended at the beginning of the
+command. 
+
+For example, the following execution parameters 
+
+![Execute](doc/README/executor.png)
+
+run the following command on the terminal
+
+```
+PYTHONPATH=. bash test.py --time 1
+```
 
 ## Contributing
 
