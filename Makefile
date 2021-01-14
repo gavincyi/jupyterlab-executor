@@ -1,7 +1,7 @@
 .PHONY: clean build check check_lint dev-run-jupyterlab-2.x dev-run-jupyterlab-3.x
 
 clean:
-	rm -rf venv* lib node_modules *.egg-info jupyterlab_executor/labextension
+	rm -rf venv* lib node_modules *.egg-info jupyterlab_executor/labextension dist build
 
 venv-jupyterlab-2.x:
 	virtualenv venv-jupyterlab-2.x
@@ -32,7 +32,7 @@ dev-run-jupyterlab-3.x: build
 	jupyter lab
 
 dist:  # For JupyterLab >= 3.0
-	rm -rf dist
+	rm -rf dist build
 	python setup.py sdist
 	python setup.py bdist_wheel
 	ls -l dist

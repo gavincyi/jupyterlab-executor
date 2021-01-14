@@ -1,10 +1,14 @@
-# jupyterlab_executor
+# jupyterlab-executor
+
+[![PyPI Release](https://img.shields.io/pypi/v/jupyterlab-executor.svg)](https://pypi.org/project/jupyterlab-executor/)
 
 ![Github Actions Status](https://github.com/gavincyi/jupyterlab-executor/workflows/Build/badge.svg)
 
+![PyPI Downloads](https://img.shields.io/pypi/dm/jupyterlab-executor.svg)
+
 JupyterLab extension of executing the scripts
 
-[![demo](doc/README/demo.gif)]
+![demo](doc/README/demo.gif)
 
 The extension helps the user execute the script in the terminal and provides
 multiple common executors, e.g. bash and python. Users can customise the
@@ -37,7 +41,7 @@ jupyter labextension install @gavincyi/jupyterlab-executor
 
 The executors can be customised from the JupyterLab settings.
 
-[![Customisation settings](doc/README/customisation-settings.png)]
+![Customisation settings](doc/README/customisation-settings.png)
 
 Alternatively, the customisation JSON file can be appended into the
 [users setting directory](https://jupyterlab.readthedocs.io/en/stable/user/directories.html?highlight=%22jupyterlab-settings%22#jupyterlab-user-settings-directory).
@@ -50,11 +54,11 @@ and the format is like the following
     "executors": [
         {
             "name": "bash",
-            "command": "bash "
+            "command": "bash {path} {args}"
         },
         {
             "name": "python",
-            "command": "python "
+            "command": "python {path} {args}"
         },
         ...
     ]
@@ -65,12 +69,38 @@ The `executors` variable is a list of descriptions, of which
 
 1. `name` is the string shown in the dialog
 
-2. `command` is the executor command to run
+2. `command` is the executor command template to run, where `{path}`
+is the file path returned by the content manager in the JupyterLab,
+and `args` is the arguments passed in by the users.
 
-The execution script format is `${command}${path} ${args}`, where
-`args` is the user defined arguments in the dialog.
+The environment variables are always appended at the beginning of the
+command. 
+
+For example, the following execution parameters 
+
+![Execute](doc/README/executor.png)
+
+run the following command on the terminal
+
+```
+PYTHONPATH=. bash test.py --time 1
+```
 
 ## Contributing
+
+### Roadmap
+
+The following features are not yet completed but on the roadmap. 
+
+- Inject environment variables
+
+- Support script argument template
+
+- Support default script arguments
+
+- Support refreshing the list of executors after the setting update
+
+The above features will come out very soon.
 
 ### Development install
 
