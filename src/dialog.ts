@@ -27,7 +27,7 @@ function createDialogBody(options: ExecutorOptions, path: string): HTMLElement {
   const body = document.createElement('div');
 
   // Add executor selector
-  var label = document.createElement('label');
+  let label = document.createElement('label');
   label.textContent = 'Executor';
   body.appendChild(label);
   const selector = document.createElement('select');
@@ -43,7 +43,7 @@ function createDialogBody(options: ExecutorOptions, path: string): HTMLElement {
   label = document.createElement('label');
   label.textContent = 'Path';
   body.appendChild(label);
-  var textbox = document.createElement('input');
+  let textbox = document.createElement('input');
   textbox.className = 'path';
   textbox.type = 'text';
   textbox.value = path;
@@ -54,7 +54,7 @@ function createDialogBody(options: ExecutorOptions, path: string): HTMLElement {
   label = document.createElement('label');
   label.textContent = 'Arugments';
   body.appendChild(label);
-  var textbox = document.createElement('input');
+  textbox = document.createElement('input');
   textbox.className = 'arguments';
   textbox.type = 'text';
   textbox.value = '';
@@ -89,15 +89,11 @@ export class ExecutionWidget extends Widget {
     const executor = this.node.querySelector('select') as HTMLSelectElement;
     const args = this.node.querySelector('.arguments') as HTMLInputElement;
     const envs = this.node.querySelector('.envs') as HTMLInputElement;
-    var value = executor.value;
-    if (!!envs.value) {
+    let value = executor.value;
+    if (envs.value) {
       value = `${envs.value} ${value}`;
     }
-    return (
-      value
-      .replace('{path}', this._path)
-      .replace('{args}', args.value)
-    );
+    return value.replace('{path}', this._path).replace('{args}', args.value);
   }
 
   private _path = '';
