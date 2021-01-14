@@ -12,11 +12,11 @@
       "default": [
         {
             "name": "bash",
-            "command": "bash "
+            "command": "bash {path} {args}"
         },
         {
             "name": "python",
-            "command": "python "
+            "command": "python {path} {args}"
         }
       ]
     }

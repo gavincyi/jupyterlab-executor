@@ -23,13 +23,13 @@ export class ExecutorOptions {
   executors: any;
 }
 
-function createDialogBody(options: ExecutorOptions): HTMLElement {
+function createDialogBody(options: ExecutorOptions, path: string): HTMLElement {
   const body = document.createElement('div');
 
   // Add executor selector
-  const executorLabel = document.createElement('label');
-  executorLabel.textContent = 'Executor';
-  body.appendChild(executorLabel);
+  var label = document.createElement('label');
+  label.textContent = 'Executor';
+  body.appendChild(label);
   const selector = document.createElement('select');
   for (const executor of options.executors) {
     const option = document.createElement('option');
@@ -39,11 +39,33 @@ function createDialogBody(options: ExecutorOptions): HTMLElement {
   }
   body.appendChild(selector);
 
+  // Add path (disabled)
+  label = document.createElement('label');
+  label.textContent = 'Path';
+  body.appendChild(label);
+  var textbox = document.createElement('input');
+  textbox.className = 'path';
+  textbox.type = 'text';
+  textbox.value = path;
+  textbox.disabled = true;
+  body.appendChild(textbox);
+
   // Add execute arguments
-  const arugmentsLabel = document.createElement('label');
-  arugmentsLabel.textContent = 'Arugments';
-  body.appendChild(arugmentsLabel);
-  const textbox = document.createElement('input');
+  label = document.createElement('label');
+  label.textContent = 'Arugments';
+  body.appendChild(label);
+  var textbox = document.createElement('input');
+  textbox.className = 'arguments';
+  textbox.type = 'text';
+  textbox.value = '';
+  body.appendChild(textbox);
+
+  // Add environment variable
+  label = document.createElement('label');
+  label.textContent = 'Environment variables';
+  body.appendChild(label);
+  textbox = document.createElement('input');
+  textbox.className = 'envs';
   textbox.type = 'text';
   textbox.value = '';
   body.appendChild(textbox);
@@ -59,14 +81,23 @@ export class ExecutionWidget extends Widget {
    * Create a new kernel selector widget.
    */
   constructor(path: string, options: ExecutorOptions) {
-    super({ node: createDialogBody(options) });
+    super({ node: createDialogBody(options, path) });
     this._path = path;
   }
 
   getValue(): string {
     const executor = this.node.querySelector('select') as HTMLSelectElement;
-    const args = this.node.querySelector('input') as HTMLInputElement;
-    return `${executor.value}${this._path} ${args.value}`;
+    const args = this.node.querySelector('.arguments') as HTMLInputElement;
+    const envs = this.node.querySelector('.envs') as HTMLInputElement;
+    var value = executor.value;
+    if (!!envs.value) {
+      value = `${envs.value} ${value}`;
+    }
+    return (
+      value
+      .replace('{path}', this._path)
+      .replace('{args}', args.value)
+    );
   }
 
   private _path = '';
