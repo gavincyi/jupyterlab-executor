@@ -143,3 +143,37 @@ jupyter lab build --minimize=False
 ```bash
 pip uninstall jupyterlab_executor
 ```
+
+### Release
+
+The release should follow the below steps
+
+#### JupyterLab 3.x
+
+1. `make clean`
+
+2. `make venv-jupyterlab-3.x`
+
+3. `source venv-jupyterlab-3.x/bin/activate`
+
+4. `make release`
+
+#### JupyterLab 2.x
+
+1. Check out the `feature/jupyterlab-2.x-compat` branch, i.e. `git checkout feature/jupyterlab-2.x-compat`
+
+2. Merge the main branch, i.e. `git merge main`
+
+3. Check the `package.json` dependencies are not modified.
+
+4. `make clean`
+
+5. `make venv-jupyterlab-2.x`
+
+6. `source venv-jupyterlab-3.x/bin/activate`
+
+7. Test run, i.e. `make venv-jupyterlab-2.x`
+
+8. `git push origin feature/jupyterlab-2.x-compat`
+
+9. `make release-npm`
