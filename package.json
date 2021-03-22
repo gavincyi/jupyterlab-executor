@@ -41,7 +41,8 @@
     "prepare": "jlpm run clean && jlpm run build:prod",
     "watch": "run-p watch:src watch:labextension",
     "watch:src": "tsc -w",
-    "watch:labextension": "jupyter labextension watch ."
+    "watch:labextension": "jupyter labextension watch .",
+    "prettier": "prettier --list-different --write \"src/*{.ts,.tsx,.js,.jsx,.css,.json,.md,.yml}\""
   },
   "dependencies": {
     "@jupyterlab/application": "^3.0.0",

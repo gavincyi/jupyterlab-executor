@@ -2,12 +2,10 @@ import { ReactWidget, UseSignal } from '@jupyterlab/apputils';
 
 import { Signal } from '@lumino/signaling';
 
-import {
-  PartialJSONObject
-} from '@lumino/coreutils';
+import { PartialJSONObject } from '@lumino/coreutils';
 
 import * as React from 'react';
-import { style } from 'typestyle'; 
+import { style } from 'typestyle';
 
 /**
  * Executor options
@@ -23,7 +21,7 @@ export interface IExecutor extends PartialJSONObject {
   /**
    * Executor
    */
-  
+
   // Command in the format of {path} and {args}
   command: string;
 
@@ -67,63 +65,81 @@ const filterInputClass = style({
 });
 
 export class CommandWidget extends ReactWidget {
-
   constructor(path: string, options: IExecutor[]) {
-      super();
-      this._path = path;
-      this._options = options;
-      console.log(options);
-      this._selectedExecutor = options[0].command;
+    super();
+    this._path = path;
+    this._options = options;
+    console.log(options);
+    this._selectedExecutor = options[0].command;
   }
 
   getValue(): string {
-    const command = (
-        this._selectedExecutor
-        .replace('{path}', this._path)
-        .replace('{args}', this._arguments)
-    );
+    const command = this._selectedExecutor
+      .replace('{path}', this._path)
+      .replace('{args}', this._arguments);
     return `${this._environVariables} ${command}`;
   }
 
   protected render(): React.ReactElement<any> {
     return (
-      <div className={wrapperClass} >
+      <div className={wrapperClass}>
         <label htmlFor="executor">Executor</label>
-        <select id="executor" className={filterInputClass} onChange={ e => {
+        <select
+          id="executor"
+          className={filterInputClass}
+          onChange={e => {
             this._selectedExecutor = e.target.value;
             this._signal.emit();
-        }}>
-            { this._options.map((executor: any) => (
-                <option value={executor.command}>{executor.name}</option>
-            ))}
+          }}
+        >
+          {this._options.map((executor: any) => (
+            <option value={executor.command}>{executor.name}</option>
+          ))}
         </select>
         <label>
           Path
-          <input type="text" id="path" className={filterInputClass} value={this._path} disabled />
+          <input
+            type="text"
+            id="path"
+            className={filterInputClass}
+            value={this._path}
+            disabled
+          />
         </label>
         <label>
-            Arugments
-            <input
-              type="text" id="arguments" className={filterInputClass} onChange={ e => {
-                  this._arguments = e.target.value;
-                  this._signal.emit();
-              }}
-            />
+          Arugments
+          <input
+            type="text"
+            id="arguments"
+            className={filterInputClass}
+            onChange={e => {
+              this._arguments = e.target.value;
+              this._signal.emit();
+            }}
+          />
         </label>
         <label>
-            Environment variables
-            <input
-              type="text" id="environVariables" className={filterInputClass} onChange={ e => {
-                  this._environVariables = e.target.value;
-                  this._signal.emit();
-              }}
-            />
+          Environment variables
+          <input
+            type="text"
+            id="environVariables"
+            className={filterInputClass}
+            onChange={e => {
+              this._environVariables = e.target.value;
+              this._signal.emit();
+            }}
+          />
         </label>
         <label>
           Command
           <UseSignal signal={this._signal}>
             {(): JSX.Element => (
-              <input type="text" className={filterInputClass} value={this.getValue()} disabled />
+              <input
+                type="text"
+                className={filterInputClass}
+                value={this.getValue()}
+                disabled
+              />
             )}
           </UseSignal>
         </label>
@@ -137,5 +153,4 @@ export class CommandWidget extends ReactWidget {
   private _environVariables = '';
   private _options = [] as IExecutor[];
   private _signal = new Signal<this, void>(this);
-
 }

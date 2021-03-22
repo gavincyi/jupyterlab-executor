@@ -19,7 +19,7 @@ import { IExecutor, CommandWidget } from './command';
 export function showExecutionDialog(
   app: JupyterFrontEnd,
   path: string,
-  options: IExecutor[],
+  options: IExecutor[]
 ) {
   const dialog = showDialog({
     title: 'Execute',

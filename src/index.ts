@@ -31,11 +31,11 @@ function activate(
 ) {
   console.log('JupyterLab extension jupyterlab-executor is activated!');
   const { tracker } = factory;
-  var executors = [] as IExecutor[];
+  let executors = [] as IExecutor[];
 
   Promise.all([settingRegistry.load(PLUGIN_ID), app.restored]).then(
     ([settings]) => {
-       executors = settings.composite.executors as IExecutor[];
+      executors = settings.composite.executors as IExecutor[];
     }
   );
 
