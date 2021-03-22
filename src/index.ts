@@ -9,7 +9,9 @@ import { IFileBrowserFactory } from '@jupyterlab/filebrowser';
 
 import { ISettingRegistry } from '@jupyterlab/settingregistry';
 
-import { ExecutorOptions, showExecutionDialog } from './dialog';
+import { IExecutor } from './command';
+
+import { showExecutionDialog } from './executor';
 
 function isExecutableScript(widget: any): boolean {
   return widget && toArray(widget.selectedItems()).length === 1;
@@ -29,11 +31,11 @@ function activate(
 ) {
   console.log('JupyterLab extension jupyterlab-executor is activated!');
   const { tracker } = factory;
-  const executorOptions = new ExecutorOptions();
+  let executors = [] as IExecutor[];
 
   Promise.all([settingRegistry.load(PLUGIN_ID), app.restored]).then(
     ([settings]) => {
-      executorOptions.executors = settings.get('executors').composite;
+      executors = settings.composite.executors as IExecutor[];
     }
   );
 
@@ -46,7 +48,7 @@ function activate(
 
       // Show the execution dialog
       const path = widget.selectedItems().next().path;
-      showExecutionDialog(app, path, executorOptions);
+      showExecutionDialog(app, path, executors);
     },
     isVisible: () => isExecutableScript(tracker.currentWidget),
     iconClass: 'jp-RunIcon',
