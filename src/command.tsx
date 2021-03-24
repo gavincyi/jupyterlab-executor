@@ -7,16 +7,6 @@ import { PartialJSONObject } from '@lumino/coreutils';
 import * as React from 'react';
 import { style } from 'typestyle';
 
-/**
- * Executor options
- */
-export class ExecutorOptions {
-  /**
-   * List of executors
-   */
-  executors: IExecutor[];
-}
-
 export interface IExecutor extends PartialJSONObject {
   /**
    * Executor
@@ -77,6 +67,11 @@ export class CommandWidget extends ReactWidget {
     const command = this._selectedExecutor
       .replace('{path}', this._path)
       .replace('{args}', this._arguments);
+
+    if (this._environVariables.length === 0) {
+      return command;
+    }
+
     return `${this._environVariables} ${command}`;
   }
 
