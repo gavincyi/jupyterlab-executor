@@ -68,7 +68,7 @@ export class CommandWidget extends ReactWidget {
       .replace('{path}', this._path)
       .replace('{args}', this._arguments);
 
-    if (this._environVariables.length == 0) {
+    if (this._environVariables.length === 0) {
       return command;
     }
 
