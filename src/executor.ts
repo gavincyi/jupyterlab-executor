@@ -44,7 +44,7 @@ export function showExecutionDialog(
         term1.title.closable = true;
 
         const widget = new MainAreaWidget({ content: term1 });
-        widget.id = 'jupyter-executor';
+        widget.id = `jupyter-executor-${Date.now()}`;
         widget.title.label = 'Execute';
         widget.title.closable = true;
 
