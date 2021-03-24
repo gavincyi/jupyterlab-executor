@@ -92,13 +92,9 @@ PYTHONPATH=. bash test.py --time 1
 
 The following features are not yet completed but on the roadmap. 
 
-- Inject environment variables
-
 - Support script argument template
 
 - Support default script arguments
-
-- Support refreshing the list of executors after the setting update
 
 The above features will come out very soon.
 
