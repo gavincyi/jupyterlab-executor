@@ -33,9 +33,14 @@ function activate(
   const { tracker } = factory;
   let executors = [] as IExecutor[];
 
+  const updateSettings = (settings: ISettingRegistry.ISettings): void => {
+    executors = settings.composite.executors as IExecutor[];
+  };
+
   Promise.all([settingRegistry.load(PLUGIN_ID), app.restored]).then(
     ([settings]) => {
-      executors = settings.composite.executors as IExecutor[];
+      updateSettings(settings);
+      settings.changed.connect(updateSettings);
     }
   );
 
