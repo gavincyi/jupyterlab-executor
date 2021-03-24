@@ -24,9 +24,9 @@ export function showExecutionDialog(
   const dialog = showDialog({
     title: 'Execute',
     buttons: [
-      Dialog.createButton({ label: 'Execute' }),
-      Dialog.okButton({ label: 'Copy Command' }),
-      Dialog.cancelButton({ label: 'Cancel' })
+      Dialog.cancelButton({ label: 'Cancel' }),
+      Dialog.createButton({ label: 'Copy Command' }),
+      Dialog.okButton({ label: 'Execute' })
     ],
     body: new CommandWidget(path, options)
   });
