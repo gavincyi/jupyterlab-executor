@@ -1,0 +1,14 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.2.0
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: gavincyi@gmail.com
+author_name: Gavin Chan
+has_binder: false
+has_settings: false
+kind: frontend
+labextension_name: jupyterlab_executor
+project_short_description: JupyterLab extension of executing the scripts
+python_name: jupyterlab_executor
+repository: https://github.com/gavincyi/jupyterlab-executor
+test: true
+
