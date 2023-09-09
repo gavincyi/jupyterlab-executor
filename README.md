@@ -144,8 +144,6 @@ The release should follow the below steps
 
 2. `make venv`
 
-3. `source venv`
-
-4. Update the version number in `package.json`
+3. Update the version number in `package.json`
 
 4. `make release`
