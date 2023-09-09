@@ -21,20 +21,14 @@ up with the PyPI version sometimes.
 
 ## Requirements
 
-* JupyterLab >= 2.0
+* JupyterLab >= 4.0
 
 ## Install
 
-* For JupyterLab >= 3.0, the package can be installed via PyPI
+The package can be installed via PyPI
 
 ```bash
 pip install jupyterlab_executor
-```
-
-* For JupyterLab == 2.x, the package is provided only in npm
-
-```bash
-jupyter labextension install @gavincyi/jupyterlab-executor
 ```
 
 ## Customisation
@@ -109,8 +103,8 @@ The `jlpm` command is JupyterLab's pinned version of
 ```bash
 # Clone the repo to your local environment
 # Change directory to the jupyterlab_executor directory
-# Install jupyter-packaging
-pip install jupyter-packaging==0.7.12
+# Install jupyterlab
+pip install jupyterlab
 # Install package in development mode
 pip install -e .
 # Link your development version of the extension with JupyterLab
@@ -146,32 +140,12 @@ pip uninstall jupyterlab_executor
 
 The release should follow the below steps
 
-#### JupyterLab 3.x
-
 1. `make clean`
 
-2. `make venv-jupyterlab-3.x`
+2. `make venv`
 
-3. `source venv-jupyterlab-3.x/bin/activate`
+3. `source venv`
+
+4. Update the version number in `package.json`
 
 4. `make release`
-
-#### JupyterLab 2.x
-
-1. Check out the `feature/jupyterlab-2.x-compat` branch, i.e. `git checkout feature/jupyterlab-2.x-compat`
-
-2. Merge the main branch, i.e. `git merge main`
-
-3. Check the `package.json` dependencies are not modified.
-
-4. `make clean`
-
-5. `make venv-jupyterlab-2.x`
-
-6. `source venv-jupyterlab-3.x/bin/activate`
-
-7. Test run, i.e. `make venv-jupyterlab-2.x`
-
-8. `git push origin feature/jupyterlab-2.x-compat`
-
-9. `make release-npm`

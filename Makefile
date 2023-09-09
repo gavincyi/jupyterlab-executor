@@ -33,8 +33,8 @@ dev-run-jupyterlab-3.x: build
 
 dist:  # For JupyterLab >= 3.0
 	rm -rf dist build
-	python setup.py sdist
-	python setup.py bdist_wheel
+	python -m build -s
+	python -m build
 	ls -l dist
 
 release: dist ## For JupyterLab >= 3.0
