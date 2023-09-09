@@ -1,0 +1,42 @@
+{
+    "title": "Executor",
+    "description": "Settings for the executor plugin.",
+    "jupyter.lab.menus": {
+      "context": [
+          {
+            "command": "gavincyi/jupyterlab-executor:execute",
+            "selector": ".jp-DirListing-item",
+            "rank": 0
+          }
+      ]
+    }, 
+    "properties": {
+      "executors": {
+        "description": "The list of the executors.",
+        "title": "Executor",
+        "type": "array",
+        "items": { "$ref": "#/definitions/executor" },
+        "default": [
+          {
+              "name": "bash",
+              "command": "bash {path} {args}"
+          },
+          {
+              "name": "python",
+              "command": "python {path} {args}"
+          }
+        ]
+      }
+    },
+    "type": "object",
+    "definitions": {
+      "executor": {
+        "properties": {
+          "command": { "type": "string" },
+          "name": { "type": "string" }
+        },
+        "required": [ "name", "command" ],
+        "type": "object"
+      }
+    }
+  }

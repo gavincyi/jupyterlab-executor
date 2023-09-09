@@ -1,5 +1,5 @@
 {
-    "name": "jupyterlab_executor",
+    "name": "@gavincyi/jupyterlab-executor",
     "version": "0.1.0",
     "description": "JupyterLab extension of executing the scripts",
     "keywords": [
@@ -18,7 +18,8 @@
     },
     "files": [
         "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
-        "style/**/*.{css,js,eot,gif,html,jpg,json,png,svg,woff2,ttf}"
+        "style/**/*.{css,js,eot,gif,html,jpg,json,png,svg,woff2,ttf}",
+        "schema/*.json"
     ],
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -58,7 +59,11 @@
         "watch:labextension": "jupyter labextension watch ."
     },
     "dependencies": {
-        "@jupyterlab/application": "^4.0.0"
+        "@jupyterlab/application": "^4.0.0",
+        "@jupyterlab/apputils": "^4.0.0",
+        "@jupyterlab/filebrowser": "^4.0.0",
+        "@jupyterlab/terminal": "^4.0.0",
+        "@phosphor/algorithm": "^1.2.0"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",
@@ -97,7 +102,8 @@
     },
     "jupyterlab": {
         "extension": true,
-        "outputDir": "jupyterlab_executor/labextension"
+        "outputDir": "jupyterlab_executor/labextension",
+        "schemaDir": "schema"
     },
     "eslintIgnore": [
         "node_modules",
