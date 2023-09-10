@@ -13,6 +13,8 @@ import { IExecutor } from './command';
 
 import { showExecutionDialog } from './executor';
 
+import path from "path";
+
 const PLUGIN_ID = '@gavincyi/jupyterlab-executor:executor';
 
 const COMMAND_ID = 'gavincyi/jupyterlab-executor:execute';
@@ -51,8 +53,9 @@ function activate(
       }
 
       // Show the execution dialog
-      const path = widget.selectedItems().next()!.value.path;
-      showExecutionDialog(app, path, executors);
+      const serverRoot = (app as any)?.paths?.directories?.serverRoot;
+      const localPath = widget.selectedItems().next()!.value.path;
+      showExecutionDialog(app, path.join(serverRoot, localPath), executors);
     },
   });
 }
