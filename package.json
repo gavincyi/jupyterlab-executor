@@ -63,7 +63,8 @@
         "@jupyterlab/apputils": "^4.0.0",
         "@jupyterlab/filebrowser": "^4.0.0",
         "@jupyterlab/terminal": "^4.0.0",
-        "@phosphor/algorithm": "^1.2.0"
+        "@phosphor/algorithm": "^1.2.0",
+        "path": "^0.12.7"
     },
     "devDependencies": {
         "@jupyterlab/builder": "^4.0.0",
